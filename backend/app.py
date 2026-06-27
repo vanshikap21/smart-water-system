@@ -13,17 +13,25 @@ from routes.ml_routes import ml_bp
 from routes.ai_routes import ai_bp
 from services.mqtt_service import start_mqtt_client
 
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s"
 )
+
 logger = logging.getLogger(__name__)
 
 
 def create_app():
     """Application factory pattern."""
-    app = Flask(__name__, static_folder="../frontend", static_url_path="/")
+
+    app = Flask(
+        __name__,
+        static_folder="../frontend",
+        static_url_path="/"
+    )
+
     CORS(app)
 
     # Load configuration
@@ -34,12 +42,23 @@ def create_app():
         init_db()
         logger.info("Database initialized.")
 
-    # Register blueprints
-    app.register_blueprint(data_bp, url_prefix="/api")
-    app.register_blueprint(ml_bp,   url_prefix="/api")
-    app.register_blueprint(ai_bp,   url_prefix="/api")
+    # Register API blueprints
+    app.register_blueprint(
+        data_bp,
+        url_prefix="/api"
+    )
 
-    # Serve frontend index
+    app.register_blueprint(
+        ml_bp,
+        url_prefix="/api"
+    )
+
+    app.register_blueprint(
+        ai_bp,
+        url_prefix="/api"
+    )
+
+    # Serve frontend
     @app.route("/")
     def index():
         return app.send_static_file("index.html")
@@ -47,12 +66,26 @@ def create_app():
     return app
 
 
+# Create global app instance for Gunicorn
+app = create_app()
+
+
+# Start MQTT listener
+mqtt_thread = threading.Thread(
+    target=start_mqtt_client,
+    daemon=True
+)
+
+mqtt_thread.start()
+
+logger.info("MQTT client thread started.")
+
+
 if __name__ == "__main__":
-    app = create_app()
 
-    # Start MQTT listener in background thread
-    mqtt_thread = threading.Thread(target=start_mqtt_client, daemon=True)
-    mqtt_thread.start()
-    logger.info("MQTT client thread started.")
-
-    app.run(host="0.0.0.0", port=5000, debug=True, use_reloader=False)
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=False,
+        use_reloader=False
+    )
