@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>SmartTap — AI Water Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+  LANDING PAGE
+═══════════════════════════════════════ -->
+<div id="landingPage">
+
+  <!-- HERO SECTION — full-bleed atmospheric background -->
+  <section class="hero-section">
+    <!-- Layered background: gradient sky + SVG mountain silhouette + animated water -->
+    <div class="hero-bg">
+      <div class="hero-sky"></div>
+      <div class="hero-mountains">
+        <svg viewBox="0 0 1440 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,300 L0,180 L80,140 L160,160 L240,100 L320,120 L400,80 L480,110 L560,60 L640,90 L720,50 L800,85 L880,45 L960,75 L1040,55 L1120,90 L1200,70 L1280,100 L1360,80 L1440,110 L1440,300Z" fill="rgba(13,59,110,0.25)"/>
+          <path d="M0,300 L0,220 L120,180 L240,200 L360,150 L480,170 L600,130 L720,160 L840,120 L960,150 L1080,110 L1200,140 L1320,120 L1440,150 L1440,300Z" fill="rgba(96,184,232,0.15)"/>
+        </svg>
+      </div>
+      <div class="hero-trees">
+        <svg viewBox="0 0 1440 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Tree silhouettes like the reference images -->
+          <g fill="rgba(13,40,80,0.55)">
+            <polygon points="30,160 55,80 80,160"/>
+            <polygon points="55,160 80,95 105,160"/>
+            <polygon points="10,160 35,100 60,160"/>
+            <polygon points="80,160 110,70 140,160"/>
+            <polygon points="110,160 140,85 170,160"/>
+            <polygon points="135,160 165,75 195,160"/>
+            <polygon points="165,160 200,65 235,160"/>
+            <polygon points="200,160 235,80 270,160"/>
+            <polygon points="240,160 275,90 310,160"/>
+            <polygon points="270,160 308,72 346,160"/>
+            <polygon points="310,160 350,82 390,160"/>
+            <polygon points="355,160 395,68 435,160"/>
+            <polygon points="400,160 440,78 480,160"/>
+            <polygon points="445,160 488,62 530,160"/>
+            <polygon points="495,160 540,75 585,160"/>
+            <polygon points="545,160 592,65 638,160"/>
+            <polygon points="600,160 648,72 696,160"/>
+            <polygon points="655,160 706,60 756,160"/>
+            <polygon points="715,160 768,70 820,160"/>
+            <polygon points="775,160 830,62 884,160"/>
+            <polygon points="838,160 895,68 952,160"/>
+            <polygon points="900,160 960,58 1020,160"/>
+            <polygon points="965,160 1028,72 1090,160"/>
+            <polygon points="1035,160 1100,65 1165,160"/>
+            <polygon points="1105,160 1172,75 1238,160"/>
+            <polygon points="1178,160 1248,62 1318,160"/>
+            <polygon points="1250,160 1322,72 1394,160"/>
+            <polygon points="1330,160 1385,80 1440,160"/>
+            <polygon points="1380,160 1410,88 1440,160"/>
+          </g>
+          <!-- Snow caps -->
+          <g fill="rgba(220,235,255,0.5)">
+            <polygon points="55,80 65,95 45,95"/>
+            <polygon points="110,70 122,88 98,88"/>
+            <polygon points="165,75 178,93 152,93"/>
+            <polygon points="200,65 214,85 186,85"/>
+            <polygon points="308,72 323,92 293,92"/>
+            <polygon points="440,78 456,98 424,98"/>
+            <polygon points="540,75 556,96 524,96"/>
+            <polygon points="648,72 666,94 630,94"/>
+            <polygon points="768,70 787,93 749,93"/>
+            <polygon points="895,68 915,91 875,91"/>
+            <polygon points="960,58 982,83 938,83"/>
+            <polygon points="1028,72 1050,96 1006,96"/>
+            <polygon points="1172,75 1195,99 1149,99"/>
+          </g>
+        </svg>
+      </div>
+      <!-- Animated water ripple overlay at bottom -->
+      <div class="hero-water">
+        <svg class="water-wave ww1" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,40 C180,10 360,70 540,40 C720,10 900,70 1080,40 C1260,10 1380,55 1440,40 L1440,80 L0,80Z" fill="rgba(96,184,232,0.18)"/>
+        </svg>
+        <svg class="water-wave ww2" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,50 C200,20 400,65 600,45 C800,25 1000,65 1200,45 C1320,32 1400,55 1440,48 L1440,80 L0,80Z" fill="rgba(30,111,186,0.12)"/>
+        </svg>
+      </div>
+      <!-- Glass panel overlay (like reference 1 - frosted glass effect) -->
+      <div class="hero-glass-panel"></div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="hero-nav">
+      <div class="nav-left">
+        <button class="nav-menu-icon" aria-label="menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="nav-brand">
+        <div class="brand-mark">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2C11 2 4 9.5 4 14a7 7 0 0014 0C18 9.5 11 2 11 2Z" fill="white" opacity="0.9"/><path d="M11 8C11 8 7 12.5 7 15a4 4 0 008 0C15 12.5 11 8 11 8Z" fill="rgba(255,255,255,0.3)"/></svg>
+        </div>
+        <span>SmartTap</span>
+      </div>
+      <div class="nav-right">
+        <span class="nav-phone"></span>
+        <button class="nav-cta-btn" id="landLaunchBtn">Open Dashboard</button>
+      </div>
+    </nav>
+
+    <!-- Hero content — centered large type like reference 1 -->
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        AI-POWERED WATER MONITORING
+      </div>
+      <h1 class="hero-h1">
+        Smart Water —<br/>When You Need It Most.
+      </h1>
+      <p class="hero-p">
+        Real-time IoT monitoring. Machine learning leak detection.<br/>
+        Same-day alerts. 100% conservation guarantee.
+      </p>
+      <div class="hero-btns">
+        <button class="hbtn-primary" id="heroLaunchBtn">Open Dashboard</button>
+        <button class="hbtn-ghost" id="heroDemoBtn">⚡ Try Demo</button>
+      </div>
+
+      <!-- Floating live stats card — frosted glass like reference 2 -->
+      <!-- <div class="live-glass-card">
+        <div class="lgc-header">
+          <div class="lgc-dot"></div>
+          <span>Live Sensor Data</span>
+          <span class="lgc-time" id="heroTime">—</span>
+        </div>
+        <div class="lgc-stats">
+          <div class="lgc-stat">
+            <span class="lgc-val" data-target="12.4" data-dec="1">0</span>
+            <span class="lgc-lbl">L/min Flow</span>
+          </div>
+          <div class="lgc-divider"></div>
+          <div class="lgc-stat">
+            <span class="lgc-val" data-target="78" data-dec="0">0</span>
+            <span class="lgc-lbl">% Tank Level</span>
+          </div>
+          <div class="lgc-divider"></div>
+          <div class="lgc-stat">
+            <span class="lgc-val green">✓ No Leak</span>
+            <span class="lgc-lbl">ML Status</span>
+          </div>
+          <div class="lgc-divider"></div>
+          <div class="lgc-stat">
+            <span class="lgc-val" data-target="86" data-dec="0">0</span>
+            <span class="lgc-lbl">Conservation</span>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </section>
+
+  <!-- HOW IT WORKS — reference 3 step card layout -->
+  <section class="how-section" id="how">
+    <div class="how-inner">
+      <div class="how-header">
+        <div class="how-eyebrow">
+          <span class="eyebrow-dot blue"></span>
+          HOW IT WORKS
+        </div>
+        <h2 class="how-title">From Sensor To Insight<br/>In 4 Steps</h2>
+        <p class="how-sub">Getting your water system monitored is easier than you think — four simple steps and intelligence returns.</p>
+      </div>
+
+      <div class="steps-row">
+        <div class="step-card sc-inactive">
+          <div class="step-num">01.</div>
+          <div class="step-name">CONNECT</div>
+          <div class="step-body">
+            <div class="step-icon">⚡</div>
+            <h3>Wire your ESP32</h3>
+            <p>Connect the YF-S201 flow sensor and HC-SR04 ultrasonic sensor to your ESP32. Takes under 10 minutes.</p>
+          </div>
+        </div>
+        <div class="step-card sc-inactive">
+          <div class="step-num">02.</div>
+          <div class="step-name">TRANSMIT</div>
+          <div class="step-body">
+            <div class="step-icon">📡</div>
+            <h3>Stream via MQTT</h3>
+            <p>Data flows securely over TLS to HiveMQ Cloud, then into our Flask + PostgreSQL backend in real time.</p>
+          </div>
+        </div>
+        <div class="step-card sc-active">
+          <div class="step-num">03.</div>
+          <div class="step-name">ANALYSE</div>
+          <div class="step-body">
+            <div class="step-icon">🤖</div>
+            <h3>AI detects leaks</h3>
+            <p>Random Forest ML classifies every reading. Gemini AI generates personalised advice and daily reports automatically.</p>
+          </div>
+        </div>
+        <div class="step-card sc-inactive">
+          <div class="step-num">04.</div>
+          <div class="step-name">SAVE</div>
+          <div class="step-body">
+            <div class="step-icon">💰</div>
+            <h3>Cut costs instantly</h3>
+            <p>See your conservation score, simulate savings, and act on AI recommendations — all from your dashboard.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR — dark navy like reference -->
+  <section class="stats-section">
+    <div class="stats-inner">
+      <div class="stat-block reveal">
+        <span class="stat-big count-anim" data-target="99.2" data-dec="1">0</span><span class="stat-big">%</span>
+        <span class="stat-desc">Leak Detection Accuracy</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-block reveal">
+        <span class="stat-big">3s</span>
+        <span class="stat-desc">Real-Time Latency</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-block reveal">
+        <span class="stat-big count-anim" data-target="30" data-dec="0">0</span><span class="stat-big">%</span>
+        <span class="stat-desc">Avg Water Saved</span>
+      </div>
+      <div class="stat-sep"></div>
+      <div class="stat-block reveal">
+        <span class="stat-big">24/7</span>
+        <span class="stat-desc">Always Monitoring</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES — white panel floating like reference 2 UI -->
+  <section class="features-section" id="features">
+    <div class="features-panel">
+      <div class="fp-label reveal">CORE FEATURES</div>
+      <h2 class="fp-title reveal">Everything your water<br/>system needs</h2>
+
+      <div class="feat-grid">
+        <div class="feat-item reveal">
+          <div class="fi-icon">🔍</div>
+          <h3>ML Leak Detection</h3>
+          <p>Random Forest classifier trained on 5,000+ samples flags abnormal flow in milliseconds — even at 3 AM.</p>
+          <div class="fi-tag">Random Forest · 99.2% F1</div>
+        </div>
+        <div class="feat-item reveal">
+          <div class="fi-icon">💰</div>
+          <h3>Dynamic Cost Engine</h3>
+          <p>Real-time tariff simulation with peak-hour multipliers, tank-level surcharges, and leak penalties.</p>
+        </div>
+        <div class="feat-item reveal">
+          <div class="fi-icon">✨</div>
+          <h3>Gemini AI Advisor</h3>
+          <p>Google's Gemini generates personalised water-saving plans and daily reports from your live sensor data.</p>
+        </div>
+        <div class="feat-item reveal">
+          <div class="fi-icon">📊</div>
+          <h3>Live Analytics</h3>
+          <p>Hourly, daily, and trend charts auto-refresh every 5 seconds via MQTT → Flask → PostgreSQL pipeline.</p>
+        </div>
+        <div class="feat-item reveal">
+          <div class="fi-icon">🏆</div>
+          <h3>Conservation Score</h3>
+          <p>0–100 score across flow, tank level, and leak status. Rated Excellent → Needs Attention.</p>
+        </div>
+        <div class="feat-item reveal fi-accent">
+          <div class="fi-icon">💡</div>
+          <h3>What-If Calculator</h3>
+          <p>Simulate 10%, 20%, or custom reductions. See your projected annual savings in rupees, instantly.</p>
+          <div class="fi-savings">
+            <div class="fi-srow"><span>10% cut</span><span>₹2,840/yr</span></div>
+            <div class="fi-srow"><span>20% cut</span><span>₹5,680/yr</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tech pills -->
+      <div class="tech-row">
+        <div class="tech-pill reveal">⚡ ESP32</div>
+        <div class="tech-pill reveal">🌊 YF-S201</div>
+        <div class="tech-pill reveal">📡 HiveMQ MQTT</div>
+        <div class="tech-pill reveal">🐍 Flask</div>
+        <div class="tech-pill reveal">🐘 PostgreSQL</div>
+        <div class="tech-pill reveal">🤖 Random Forest</div>
+        <div class="tech-pill reveal">✨ Gemini AI</div>
+        <div class="tech-pill reveal">📊 Chart.js</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA — atmospheric like hero -->
+  <section class="cta-section">
+    <div class="cta-bg">
+      <div class="cta-sky"></div>
+      <div class="cta-tree-bar">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="rgba(10,30,60,0.6)">
+            <polygon points="50,100 75,30 100,100"/><polygon points="100,100 130,20 160,100"/>
+            <polygon points="155,100 185,35 215,100"/><polygon points="210,100 245,18 280,100"/>
+            <polygon points="280,100 318,28 356,100"/><polygon points="350,100 390,15 430,100"/>
+            <polygon points="430,100 472,25 514,100"/><polygon points="515,100 560,18 605,100"/>
+            <polygon points="605,100 652,22 699,100"/><polygon points="700,100 750,15 800,100"/>
+            <polygon points="800,100 852,20 904,100"/><polygon points="905,100 960,18 1015,100"/>
+            <polygon points="1015,100 1072,25 1130,100"/><polygon points="1130,100 1190,18 1250,100"/>
+            <polygon points="1250,100 1310,28 1370,100"/><polygon points="1360,100 1400,35 1440,100"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="cta-content">
+      <h2 class="cta-h2">Start monitoring<br/>your water today.</h2>
+      <p class="cta-p">Same-day setup. Instant insights. Zero waste.</p>
+      <button class="hbtn-primary" id="ctaLaunchBtn">Open Dashboard →</button>
+    </div>
+  </section>
+
+  <footer class="land-footer">
+    <div class="brand-mark small">
+      <svg width="16" height="16" viewBox="0 0 22 22" fill="none"><path d="M11 2C11 2 4 9.5 4 14a7 7 0 0014 0C18 9.5 11 2 11 2Z" fill="#1E6FBA"/></svg>
+    </div>
+    <span>SmartTap · AI-Enabled Water Monitoring System · PostgreSQL Edition</span>
+  </footer>
+
+</div><!-- /landingPage -->
+
+
+<!-- ═══════════════════════════════════════
+  DASHBOARD APP
+═══════════════════════════════════════ -->
+<div id="appPage" style="display:none">
+
+  <!-- Demo banner -->
+  <div class="demo-banner" id="demoBanner" style="display:none">
+    <span>⚡ Demo Mode — hardcoded sample data is displayed</span>
+    <button id="exitDemoBtn">Exit Demo</button>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-top">
+      <div class="sb-brand">
+        <div class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 22 22" fill="none"><path d="M11 2C11 2 4 9.5 4 14a7 7 0 0014 0C18 9.5 11 2 11 2Z" fill="white" opacity="0.9"/></svg>
+        </div>
+        <span>SmartTap</span>
+      </div>
+      <nav class="sb-nav">
+        <a class="sb-link active" data-page="overview">
+          <span class="sb-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="6" height="6" rx="1.5" fill="currentColor"/><rect x="9" y="1" width="6" height="6" rx="1.5" fill="currentColor" opacity=".5"/><rect x="1" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".5"/><rect x="9" y="9" width="6" height="6" rx="1.5" fill="currentColor" opacity=".5"/></svg>
+          </span>
+          Overview
+        </a>
+        <a class="sb-link" data-page="monitoring">
+          <span class="sb-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="8" r="2" fill="currentColor"/><path d="M8 2v2M8 12v2M2 8h2M12 8h2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          Live Monitoring
+        </a>
+        <a class="sb-link" data-page="analytics">
+          <span class="sb-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 12 L5 7 L8 9 L11 4 L14 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 14h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </span>
+          Analytics
+        </a>
+        <a class="sb-link" data-page="ml">
+          <span class="sb-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="4" r="2" fill="currentColor"/><circle cx="3" cy="12" r="2" fill="currentColor" opacity=".6"/><circle cx="13" cy="12" r="2" fill="currentColor" opacity=".6"/><path d="M8 6v2M8 8L3 10M8 8L13 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </span>
+          ML Insights
+        </a>
+        <a class="sb-link" data-page="advisor">
+          <span class="sb-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6L14 5.5l-3 2.9.7 4.1L8 10.4l-3.7 2.1.7-4.1L2 5.5l4.2-.9L8 1z" fill="currentColor" opacity=".8"/></svg>
+          </span>
+          AI Advisor
+        </a>
+      </nav>
+    </div>
+    <div class="sb-bottom">
+      <div class="sb-status">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusLabel">Connecting…</span>
+      </div>
+      <button class="sb-back-btn" id="backToLanding">← Home</button>
+    </div>
+  </aside>
+
+  <!-- Topbar -->
+  <header class="app-topbar">
+    <button class="menu-btn" id="menuBtn">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    </button>
+    <div class="atb-center">
+      <h1 id="pageTitle">Overview</h1>
+      <span id="lastUpdate" class="atb-ts">—</span>
+    </div>
+    <div class="atb-right">
+      <label class="demo-switch">
+        <input type="checkbox" id="demoToggle"/>
+        <span class="ds-track"><span class="ds-thumb"></span></span>
+        <span class="ds-lbl">Demo</span>
+      </label>
+      <button class="refresh-btn" id="refreshBtn">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 7A5 5 0 1 1 7 2a5 5 0 0 1 3.54 1.46L12 2v4H8l1.59-1.59A3 3 0 1 0 10 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Refresh
+      </button>
+    </div>
+  </header>
+
+  <!-- App main -->
+  <main class="app-main">
+
+    <!-- PAGE: OVERVIEW -->
+    <section class="page active" id="page-overview">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kc-top">
+            <span class="kc-label">Flow Rate</span>
+            <span class="kc-badge" id="flowBadge">—</span>
+          </div>
+          <div class="kc-value mono" id="kpiFlow">—</div>
+          <div class="kc-unit">litres / minute</div>
+          <div class="kc-bar"><div class="kcb-fill blue" id="flowBar"></div></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kc-top">
+            <span class="kc-label">Tank Level</span>
+            <span class="kc-badge" id="tankBadge">—</span>
+          </div>
+          <div class="kc-value mono" id="kpiTank">—</div>
+          <div class="kc-unit">percent full</div>
+          <div class="kc-bar"><div class="kcb-fill sky" id="tankBar"></div></div>
+        </div>
+        <div class="kpi-card leak-card">
+          <div class="kc-top"><span class="kc-label">Leak Status</span></div>
+          <div class="kc-value" id="kpiLeak">—</div>
+          <div class="kc-unit" id="kpiLeakConf">—</div>
+          <div class="leak-bar" id="leakBar"></div>
+        </div>
+        <div class="kpi-card">
+          <div class="kc-top">
+            <span class="kc-label">Est. Cost / min</span>
+            <span class="kc-badge amber" id="costBadge">—</span>
+          </div>
+          <div class="kc-value mono" id="kpiCost">—</div>
+          <div class="kc-unit">₹ per minute</div>
+          <div class="kc-reason" id="costReason">—</div>
+        </div>
+        <div class="kpi-card score-kpi">
+          <div class="kc-top"><span class="kc-label">Conservation Score</span></div>
+          <div class="score-wrap">
+            <svg viewBox="0 0 80 80" class="score-svg">
+              <circle cx="40" cy="40" r="30" class="sr-track"/>
+              <circle cx="40" cy="40" r="30" class="sr-prog" id="srProg" stroke-dasharray="188" stroke-dashoffset="188"/>
+            </svg>
+            <div class="score-inner">
+              <span class="score-num" id="scoreNum">—</span>
+              <span class="score-cat" id="scoreCat">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ov-charts">
+        <div class="chart-card"><div class="cc-hd"><span>Flow Rate — Last 24 h</span></div><canvas id="miniFlowChart" height="130"></canvas></div>
+        <div class="chart-card"><div class="cc-hd"><span>Tank Level Trend</span></div><canvas id="miniTankChart" height="130"></canvas></div>
+      </div>
+    </section>
+
+    <!-- PAGE: LIVE MONITORING -->
+    <section class="page" id="page-monitoring">
+      <div class="pg-header">
+        <h2>Live Sensor Feed</h2>
+        <label class="ar-toggle"><input type="checkbox" id="autoRefresh" checked/><span>Auto-refresh 5s</span></label>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Timestamp</th><th>Flow Rate (L/min)</th><th>Tank Level (%)</th><th>Status</th></tr></thead>
+          <tbody id="monBody"><tr><td colspan="5" class="td-empty">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PAGE: ANALYTICS -->
+    <section class="page" id="page-analytics">
+      <div class="analytics-grid">
+        <div class="chart-card span2"><div class="cc-hd"><span>Hourly Consumption (L/min total)</span></div><canvas id="hourlyChart" height="150"></canvas></div>
+        <div class="chart-card"><div class="cc-hd"><span>Daily — 7 Days</span></div><canvas id="dailyChart" height="180"></canvas></div>
+        <div class="chart-card"><div class="cc-hd"><span>Tank Level Over Time</span></div><canvas id="tankTrendChart" height="180"></canvas></div>
+        <div class="chart-card span2"><div class="cc-hd"><span>Cost Trend (₹/min)</span></div><canvas id="costTrendChart" height="130"></canvas></div>
+      </div>
+    </section>
+
+    <!-- PAGE: ML INSIGHTS -->
+    <section class="page" id="page-ml">
+      <div class="ml-layout">
+        <div class="ml-card">
+          <div class="ml-card-hd">
+            <h3>Leak Prediction Engine</h3>
+            <p>Random Forest Classifier · trained on 5,000+ samples</p>
+          </div>
+          <div class="ml-result" id="mlResult">
+            <div class="ml-empty">Click "Run Prediction" to analyse current sensor data</div>
+          </div>
+          <button class="app-btn-primary full" id="runPredBtn">Run Prediction</button>
+        </div>
+        <div class="ml-card">
+          <div class="ml-card-hd"><h3>Detection Log</h3></div>
+          <table class="data-table">
+            <thead><tr><th>Time</th><th>Status</th><th>Confidence</th></tr></thead>
+            <tbody id="leakLogBody"><tr><td colspan="3" class="td-empty">No logs yet</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE: AI ADVISOR -->
+    <section class="page" id="page-advisor">
+      <div class="advisor-layout">
+        <div class="adv-card">
+          <div class="adv-hd">
+            <div class="adv-icon">✨</div>
+            <div><h3>Real-Time Insight</h3><p>Personalised analysis powered by Gemini AI</p></div>
+          </div>
+          <button class="app-btn-primary" id="insightBtn">Generate Insight</button>
+          <div class="ai-output" id="insightOut"><span class="ai-ph">Generate an insight to see Gemini's live analysis of your water data…</span></div>
+        </div>
+        <div class="adv-card">
+          <div class="adv-hd">
+            <div class="adv-icon">📋</div>
+            <div><h3>Daily Report</h3><p>24-hour summary with recommendations</p></div>
+          </div>
+          <button class="app-btn-secondary" id="reportBtn">Generate Daily Report</button>
+          <div class="ai-output" id="reportOut"><span class="ai-ph">Generate a report to get your 24-hour water usage summary…</span></div>
+        </div>
+        <div class="adv-card span2 sav-card">
+          <h3>What-If Savings Calculator</h3>
+          <p class="adv-sub">Simulate usage reductions and project your annual savings</p>
+          <div class="sav-btns">
+            <button class="sav-btn" data-r="10">10% Reduction</button>
+            <button class="sav-btn" data-r="20">20% Reduction</button>
+            <button class="sav-btn" data-r="50">50% Reduction</button>
+            <div class="sav-custom-wrap">
+              <input type="number" id="customPct" placeholder="Custom %" min="1" max="99"/>
+              <button class="app-btn-outline" id="customSavBtn">Go</button>
+            </div>
+          </div>
+          <div class="sav-result" id="savResult" style="display:none">
+            <div class="sr-col">
+              <span class="sr-lbl">Current Cost</span>
+              <span class="sr-val" id="savCurrent">—</span>
+              <span class="sr-unit">₹/min</span>
+            </div>
+            <div class="sr-arrow">→</div>
+            <div class="sr-col">
+              <span class="sr-lbl">Projected Cost</span>
+              <span class="sr-val green" id="savProj">—</span>
+              <span class="sr-unit">₹/min</span>
+            </div>
+            <div class="sr-col accent-col">
+              <span class="sr-lbl">Annual Savings</span>
+              <span class="sr-val" id="savAnnual">—</span>
+              <span class="sr-unit">per year</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div><!-- /appPage -->
+
+<!-- Global loader -->
+<div class="g-loader" id="gLoader">
+  <div class="gl-inner">
+    <div class="gl-ring"><div></div><div></div></div>
+    <p>Loading…</p>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
